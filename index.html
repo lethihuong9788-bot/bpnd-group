@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BPND GROUP — Đào tạo AI & Data thực chiến</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#050b1a;color:#e8eefc}
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;
+    background:linear-gradient(135deg,#050b1a 0%,#0a1a3d 50%,#0e2a5c 100%)}
+  #particles{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .container{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;padding:60px 24px;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .brand{display:inline-block;padding:6px 14px;border:1px solid #2a5cc4;border-radius:999px;
+    color:#6ea8ff;font-size:13px;letter-spacing:2px;font-weight:600;margin-bottom:22px}
+  h1{font-size:clamp(36px,5.5vw,68px);line-height:1.1;font-weight:800;min-height:2.3em;
+    background:linear-gradient(90deg,#fff,#6ea8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .cursor{display:inline-block;width:4px;background:#6ea8ff;margin-left:4px;animation:blink 1s steps(1) infinite;
+    -webkit-text-fill-color:initial}
+  @keyframes blink{50%{opacity:0}}
+  .sub{margin:22px 0 34px;font-size:clamp(16px,2vw,20px);color:#a9b9dc;line-height:1.6;max-width:540px}
+  .cta{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{padding:15px 30px;border-radius:10px;font-size:16px;font-weight:700;text-decoration:none;
+    transition:transform .2s,box-shadow .2s;display:inline-block}
+  .btn:hover{transform:translateY(-3px)}
+  .btn-primary{background:linear-gradient(90deg,#2f7bff,#00c2ff);color:#fff;box-shadow:0 8px 28px rgba(47,123,255,.45)}
+  .btn-ghost{border:2px solid #2f7bff;color:#9cc2ff}
+  .btn-ghost:hover{background:rgba(47,123,255,.15)}
+  .art{display:flex;justify-content:center}
+  .art svg{width:100%;max-width:460px;height:auto;filter:drop-shadow(0 0 40px rgba(47,123,255,.4))}
+  .float{animation:float 5s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-14px)}}
+  .pulse{animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.35}}
+  .courses{background:#050b1a;padding:90px 24px}
+  .courses .wrap{max-width:1200px;margin:0 auto}
+  .courses h2{text-align:center;font-size:clamp(28px,4vw,44px);font-weight:800}
+  .courses h2 span{color:#00D4FF}
+  .courses .lead{text-align:center;color:#a9b9dc;margin:12px 0 48px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .card{background:linear-gradient(160deg,#0b1a3a,#08122a);border:1px solid #16305f;border-radius:16px;
+    padding:32px 26px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .card:hover{transform:translateY(-12px);border-color:#00D4FF;
+    box-shadow:0 20px 45px rgba(0,212,255,.25),0 0 0 1px rgba(0,212,255,.4)}
+  .card .icon{width:64px;height:64px;border-radius:16px;background:rgba(0,212,255,.1);
+    display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:20px;
+    border:1px solid rgba(0,212,255,.35)}
+  .card h3{font-size:22px;margin-bottom:10px;color:#fff}
+  .card p{color:#a9b9dc;line-height:1.6;flex:1;margin-bottom:20px}
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;
+    padding-top:16px;border-top:1px solid #16305f}
+  .dur{color:#a9b9dc;font-size:14px}
+  .price{color:#00D4FF;font-size:22px;font-weight:800}
+  .card .btn-detail{text-align:center;padding:12px;border-radius:10px;border:2px solid #00D4FF;
+    color:#00D4FF;font-weight:700;text-decoration:none;transition:background .2s,color .2s}
+  .card:hover .btn-detail,.btn-detail:hover{background:#00D4FF;color:#050b1a}
+  .about{background:linear-gradient(180deg,#050b1a,#0a1a3d);padding:90px 24px}
+  .about .wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .about h2{font-size:clamp(28px,4vw,44px);font-weight:800;margin-bottom:20px}
+  .about h2 span{color:#00D4FF}
+  .about p{color:#a9b9dc;line-height:1.8;font-size:17px;margin-bottom:14px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .stat{background:rgba(11,26,58,.8);border:1px solid #16305f;border-radius:16px;padding:30px 20px;text-align:center;
+    transition:transform .3s,border-color .3s}
+  .stat:hover{transform:translateY(-6px);border-color:#00D4FF}
+  .stat .num{font-size:clamp(34px,4.5vw,52px);font-weight:800;color:#00D4FF;line-height:1}
+  .stat .lbl{margin-top:10px;color:#a9b9dc;font-size:15px}
+  .pricing{background:#050b1a;padding:90px 24px}
+  .pricing .wrap{max-width:1100px;margin:0 auto}
+  .pricing h2{text-align:center;font-size:clamp(28px,4vw,44px);font-weight:800}
+  .pricing h2 span{color:#00D4FF}
+  .pricing .lead{text-align:center;color:#a9b9dc;margin:12px 0 30px}
+  .toggle{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:48px;color:#7f94c0;font-weight:600}
+  .toggle .lab.on{color:#fff}
+  .switch{position:relative;width:58px;height:30px;border-radius:999px;border:0;cursor:pointer;background:#16305f;transition:background .3s}
+  .switch::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;
+    transition:transform .3s cubic-bezier(.4,1.4,.6,1)}
+  .switch.year{background:linear-gradient(90deg,#2f7bff,#00D4FF)}
+  .switch.year::after{transform:translateX(28px)}
+  .save{background:rgba(0,212,255,.15);color:#00D4FF;font-size:12px;padding:3px 9px;border-radius:999px;margin-left:6px}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:stretch}
+  .plan{position:relative;background:linear-gradient(160deg,#0b1a3a,#08122a);border:1px solid #16305f;border-radius:18px;
+    padding:34px 26px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+  .plan:hover{transform:translateY(-8px)}
+  .plan.pro{border:2px solid #00D4FF;transform:scale(1.05);box-shadow:0 20px 55px rgba(0,212,255,.25)}
+  .plan.pro:hover{transform:scale(1.05) translateY(-8px)}
+  .badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#2f7bff,#00D4FF);
+    color:#fff;font-size:13px;font-weight:700;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .plan h3{font-size:22px;margin-bottom:14px}
+  .p-price{min-height:84px;margin-bottom:20px}
+  .old{color:#7f94c0;text-decoration:line-through;font-size:16px;height:22px;visibility:hidden}
+  .year-on .old{visibility:visible}
+  .amt{font-size:38px;font-weight:800;color:#00D4FF;transition:opacity .2s,transform .2s}
+  .amt small{font-size:15px;color:#a9b9dc;font-weight:500}
+  .amt.swap{opacity:0;transform:translateY(8px)}
+  .feat{list-style:none;flex:1;margin-bottom:26px}
+  .feat li{padding:9px 0;color:#c3d0ee;border-bottom:1px solid #112650;font-size:15px}
+  .feat li.no{color:#6679a3}
+  .plan .btn{text-align:center;padding:13px}
+  @media(max-width:960px){.plans{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+    .plan.pro,.plan.pro:hover{transform:none}.plan.pro:hover{transform:translateY(-8px)}}
+  .backdrop{position:fixed;inset:0;z-index:100;background:rgba(2,6,16,.75);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .backdrop.open{opacity:1;visibility:visible}
+  .modal{position:relative;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;
+    background:linear-gradient(160deg,#0b1a3a,#08122a);border:1px solid #16305f;border-radius:18px;padding:34px 30px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,212,255,.2);
+    transform:scale(.9);transition:transform .3s}
+  .backdrop.open .modal{transform:scale(1)}
+  .m-close{position:absolute;top:12px;right:14px;width:38px;height:38px;border:0;border-radius:50%;background:transparent;
+    color:#a9b9dc;font-size:26px;cursor:pointer}
+  .m-close:hover{background:rgba(255,255,255,.08);color:#fff}
+  .modal h3{font-size:24px;margin-bottom:6px}
+  .modal .m-sub{color:#a9b9dc;font-size:14px;margin-bottom:22px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:14px;margin-bottom:6px;color:#c3d0ee}
+  .field label b{color:#ff5d6c}
+  .field input,.field select,.field textarea{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid #1d3a70;
+    background:#06102a;color:#e8eefc;font:inherit;font-size:16px;outline:none;transition:border-color .2s,box-shadow .2s}
+  .field textarea{resize:vertical;min-height:80px}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:#00D4FF;box-shadow:0 0 0 3px rgba(0,212,255,.15)}
+  .field.invalid input,.field.invalid select{border-color:#ff4d5e;box-shadow:0 0 0 3px rgba(255,77,94,.15)}
+  .err{display:none;color:#ff6b79;font-size:13px;margin-top:5px}
+  .field.invalid .err{display:block}
+  .submit{width:100%;padding:14px;border:0;border-radius:10px;background:linear-gradient(90deg,#2f7bff,#00D4FF);
+    color:#fff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
+  .submit:disabled{opacity:.8;cursor:wait}
+  .spin{width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;
+    animation:spin .8s linear infinite;display:none}
+  .submit.loading .spin{display:block}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .success{display:none;text-align:center;padding:20px 0}
+  .success .ok{width:80px;height:80px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,#2f7bff,#00D4FF);
+    display:flex;align-items:center;justify-content:center;font-size:42px;color:#fff;animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+  @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+  .success h3{margin-bottom:8px}
+  .success p{color:#a9b9dc;margin-bottom:22px}
+  .modal.done form{display:none}
+  .modal.done .success{display:block}
+  .modal.done .m-head{display:none}
+  #confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
+  @media(max-width:600px){
+    .backdrop{padding:0}
+    .modal{max-width:none;height:100vh;height:100dvh;max-height:none;border-radius:0;border:0;padding:56px 20px 28px}
+  }
+  .testi{background:#050b1a;padding:90px 24px}
+  .testi .wrap{max-width:760px;margin:0 auto}
+  .testi h2{text-align:center;font-size:clamp(28px,4vw,44px);font-weight:800;margin-bottom:44px}
+  .testi h2 span{color:#00D4FF}
+  .slider{overflow:hidden;border-radius:16px}
+  .track{display:flex;transition:transform .5s ease}
+  .slide{min-width:100%;padding:6px}
+  .t-card{background:linear-gradient(160deg,#0b1a3a,#08122a);border:1px solid #16305f;border-radius:16px;
+    padding:36px 32px;text-align:center}
+  .avatar{width:68px;height:68px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#2f7bff,#00D4FF);font-weight:800;font-size:24px;color:#050b1a}
+  .t-name{font-weight:700;font-size:19px}
+  .t-role{color:#7f94c0;font-size:14px;margin:4px 0 12px}
+  .stars{color:#ffc83d;font-size:20px;letter-spacing:3px;margin-bottom:16px}
+  .t-text{color:#c3d0ee;line-height:1.7;font-size:17px;font-style:italic}
+  .nav{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:24px}
+  .nav button{width:44px;height:44px;border-radius:50%;border:2px solid #00D4FF;background:transparent;
+    color:#00D4FF;font-size:20px;cursor:pointer;transition:background .2s,color .2s}
+  .nav button:hover{background:#00D4FF;color:#050b1a}
+  .dots{display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:50%;background:#16305f;cursor:pointer;transition:background .2s}
+  .dot.on{background:#00D4FF}
+  @media(max-width:860px){.about .wrap{grid-template-columns:1fr;gap:36px}}
+  @media(max-width:960px){.grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}}
+  @media(max-width:860px){
+    .container{grid-template-columns:1fr;text-align:center;gap:32px;padding:48px 20px}
+    .sub{margin-left:auto;margin-right:auto}
+    .cta{justify-content:center}
+    h1{min-height:2.6em}
+  }
+</style>
+</head>
+<body>
+<section class="hero">
+  <canvas id="particles"></canvas>
+  <div class="container">
+    <div class="text">
+      <span class="brand">BPND GROUP</span>
+      <h1><span id="type"></span><span class="cursor">&nbsp;</span></h1>
+      <p class="sub">Đào tạo AI &amp; Data thực chiến — giúp đội ngũ của bạn ứng dụng ngay vào công việc và tăng năng suất vượt trội.</p>
+      <div class="cta">
+        <a href="#dang-ky" class="btn btn-primary" data-open-modal>Đăng ký ngay</a>
+        <a href="#demo" class="btn btn-ghost">Xem demo</a>
+      </div>
+    </div>
+    <div class="art">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="float" aria-label="Minh họa AI">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2f7bff"/><stop offset="1" stop-color="#00e0ff"/>
+          </linearGradient>
+          <radialGradient id="glow"><stop offset="0" stop-color="#2f7bff" stop-opacity=".5"/><stop offset="1" stop-color="#2f7bff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="190" fill="url(#glow)"/>
+        <g stroke="url(#g)" stroke-width="2" fill="none" opacity=".8">
+          <line x1="200" y1="200" x2="70" y2="90"/><line x1="200" y1="200" x2="330" y2="90"/>
+          <line x1="200" y1="200" x2="60" y2="300"/><line x1="200" y1="200" x2="340" y2="300"/>
+          <line x1="200" y1="200" x2="200" y2="40"/><line x1="200" y1="200" x2="200" y2="360"/>
+          <line x1="70" y1="90" x2="200" y2="40"/><line x1="330" y1="90" x2="200" y2="40"/>
+          <line x1="60" y1="300" x2="200" y2="360"/><line x1="340" y1="300" x2="200" y2="360"/>
+        </g>
+        <g fill="#0a1a3d" stroke="url(#g)" stroke-width="3">
+          <circle cx="70" cy="90" r="14"/><circle cx="330" cy="90" r="14"/>
+          <circle cx="60" cy="300" r="14"/><circle cx="340" cy="300" r="14"/>
+          <circle cx="200" cy="40" r="14"/><circle cx="200" cy="360" r="14"/>
+        </g>
+        <g class="pulse" fill="#00e0ff"><circle cx="70" cy="90" r="5"/><circle cx="330" cy="300" r="5"/><circle cx="200" cy="40" r="5"/></g>
+        <rect x="140" y="140" width="120" height="120" rx="22" fill="#0a1a3d" stroke="url(#g)" stroke-width="4"/>
+        <text x="200" y="218" text-anchor="middle" font-size="52" font-weight="800" fill="url(#g)" font-family="Segoe UI,sans-serif">AI</text>
+        <g stroke="url(#g)" stroke-width="3" stroke-linecap="round">
+          <line x1="165" y1="140" x2="165" y2="125"/><line x1="200" y1="140" x2="200" y2="125"/><line x1="235" y1="140" x2="235" y2="125"/>
+          <line x1="165" y1="260" x2="165" y2="275"/><line x1="200" y1="260" x2="200" y2="275"/><line x1="235" y1="260" x2="235" y2="275"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="courses" id="khoa-hoc">
+  <div class="wrap">
+    <h2>Khóa học <span>nổi bật</span></h2>
+    <p class="lead">Lộ trình thực chiến, áp dụng ngay vào công việc.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="icon">🤖</div>
+        <h3>AI Cơ Bản</h3>
+        <p>Làm chủ ChatGPT và các công cụ AI để tự động hóa công việc hằng ngày.</p>
+        <div class="meta"><span class="dur">⏱ 12 buổi</span><span class="price">3.500.000đ</span></div>
+        <a href="#chi-tiet-ai" class="btn-detail">Xem chi tiết</a>
+      </article>
+      <article class="card">
+        <div class="icon">📊</div>
+        <h3>Data Analytics</h3>
+        <p>Phân tích dữ liệu từ Excel, SQL đến dashboard để ra quyết định chính xác.</p>
+        <div class="meta"><span class="dur">⏱ 16 buổi</span><span class="price">5.000.000đ</span></div>
+        <a href="#chi-tiet-data" class="btn-detail">Xem chi tiết</a>
+      </article>
+      <article class="card">
+        <div class="icon">💻</div>
+        <h3>Vibe Coding</h3>
+        <p>Dùng AI để tạo website, ứng dụng nhanh mà không cần biết lập trình sâu.</p>
+        <div class="meta"><span class="dur">⏱ 8 buổi</span><span class="price">2.800.000đ</span></div>
+        <a href="#chi-tiet-vibe" class="btn-detail">Xem chi tiết</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="bang-gia">
+  <div class="wrap">
+    <h2>Bảng giá <span>linh hoạt</span></h2>
+    <p class="lead">Chọn gói phù hợp với nhu cầu của bạn.</p>
+    <div class="toggle">
+      <span class="lab on" id="labM">Tháng</span>
+      <button class="switch" id="sw" role="switch" aria-checked="false" aria-label="Chuyển sang thanh toán theo năm"></button>
+      <span class="lab" id="labY">Năm <span class="save">Tiết kiệm</span></span>
+    </div>
+    <div class="plans" id="plans">
+      <div class="plan">
+        <h3>Basic</h3>
+        <div class="p-price"><div class="old" data-m="" data-y="3.5M">3.5M</div>
+          <div class="amt" data-m="3.5M" data-y="2.8M">3.5M<small> /tháng</small></div></div>
+        <ul class="feat">
+          <li>✅ Học 1 khóa bất kỳ</li><li>✅ Tài liệu & bài tập</li><li>✅ Hỗ trợ qua nhóm chat</li>
+          <li class="no">❌ Mentor 1-1</li><li class="no">❌ Dự án thực tế</li><li class="no">❌ Chứng chỉ BPND</li>
+        </ul>
+        <a href="#dang-ky" class="btn btn-ghost" data-open-modal>Bắt đầu ngay</a>
+      </div>
+      <div class="plan pro">
+        <span class="badge">⭐ Phổ biến nhất</span>
+        <h3>Pro</h3>
+        <div class="p-price"><div class="old">6.5M</div>
+          <div class="amt" data-m="6.5M" data-y="5M">6.5M<small> /tháng</small></div></div>
+        <ul class="feat">
+          <li>✅ Học cả 3 khóa</li><li>✅ Tài liệu & bài tập</li><li>✅ Hỗ trợ ưu tiên</li>
+          <li>✅ Mentor 1-1 hằng tháng</li><li>✅ Dự án thực tế</li><li class="no">❌ Đào tạo riêng cho doanh nghiệp</li>
+        </ul>
+        <a href="#dang-ky" class="btn btn-primary" data-open-modal>Bắt đầu ngay</a>
+      </div>
+      <div class="plan">
+        <h3>Enterprise</h3>
+        <div class="p-price"><div class="old"></div><div class="amt" style="font-size:30px">Liên hệ</div></div>
+        <ul class="feat">
+          <li>✅ Học không giới hạn</li><li>✅ Nội dung thiết kế riêng</li><li>✅ Hỗ trợ 24/7</li>
+          <li>✅ Mentor 1-1 không giới hạn</li><li>✅ Dự án theo nghiệp vụ công ty</li><li>✅ Chứng chỉ BPND</li>
+        </ul>
+        <a href="#dang-ky" class="btn btn-ghost" data-open-modal>Bắt đầu ngay</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="ve-chung-toi">
+  <div class="wrap">
+    <div>
+      <h2>Về <span>chúng tôi</span></h2>
+      <p>BPND GROUP là đơn vị đào tạo AI &amp; Data thực chiến, đồng hành cùng cá nhân và doanh nghiệp trong chuyển đổi số.</p>
+      <p>Chúng tôi tập trung vào bài học ứng dụng ngay, giúp học viên tăng hiệu suất công việc một cách rõ rệt.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num"><span class="count" data-to="500">0</span>+</div><div class="lbl">Học viên</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="95">0</span>%</div><div class="lbl">Hài lòng</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="50">0</span>+</div><div class="lbl">Doanh nghiệp</div></div>
+      <div class="stat"><div class="num"><span class="count" data-to="3">0</span></div><div class="lbl">Năm kinh nghiệm</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="testi" id="phan-hoi">
+  <div class="wrap">
+    <h2>Phản hồi <span>học viên</span></h2>
+    <div class="slider">
+      <!-- TODO: thay tên, chức vụ, nhận xét bên dưới bằng phản hồi thật của học viên BPND GROUP -->
+      <div class="track" id="track">
+        <div class="slide"><div class="t-card">
+          <div class="avatar">NA</div>
+          <div class="t-name">Nguyễn Văn A</div><div class="t-role">Trưởng phòng Marketing</div>
+          <div class="stars">★★★★★</div>
+          <p class="t-text">“Khóa AI Cơ Bản giúp team mình rút ngắn thời gian làm báo cáo và nội dung rất nhiều. Bài học thực chiến, áp dụng được ngay.”</p>
+        </div></div>
+        <div class="slide"><div class="t-card">
+          <div class="avatar">TB</div>
+          <div class="t-name">Trần Thị B</div><div class="t-role">Chuyên viên Phân tích dữ liệu</div>
+          <div class="stars">★★★★★</div>
+          <p class="t-text">“Data Analytics có lộ trình rõ ràng, giảng viên hỗ trợ nhiệt tình. Mình đã tự xây được dashboard cho công ty.”</p>
+        </div></div>
+        <div class="slide"><div class="t-card">
+          <div class="avatar">LC</div>
+          <div class="t-name">Lê Minh C</div><div class="t-role">Founder Startup</div>
+          <div class="stars">★★★★★</div>
+          <p class="t-text">“Sau 8 buổi Vibe Coding, mình tự làm được website bán hàng mà không cần thuê lập trình viên.”</p>
+        </div></div>
+      </div>
+    </div>
+    <div class="nav">
+      <button id="prev" aria-label="Trước">‹</button>
+      <div class="dots" id="dots"></div>
+      <button id="next" aria-label="Sau">›</button>
+    </div>
+  </div>
+</section>
+
+<div class="backdrop" id="backdrop" aria-hidden="true">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <button class="m-close" id="mClose" aria-label="Đóng">&times;</button>
+    <div class="m-head">
+      <h3 id="m-title">Đăng ký khóa học</h3>
+      <p class="m-sub">Điền thông tin, BPND GROUP sẽ liên hệ tư vấn cho bạn sớm nhất.</p>
+    </div>
+    <form id="regForm" novalidate>
+      <div class="field"><label for="f-name">Họ tên <b>*</b></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Nguyễn Văn A">
+        <div class="err">Vui lòng nhập họ tên (ít nhất 2 ký tự).</div></div>
+      <div class="field"><label for="f-email">Email <b>*</b></label>
+        <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="ban@email.com">
+        <div class="err">Email chưa đúng định dạng.</div></div>
+      <div class="field"><label for="f-phone">Số điện thoại <b>*</b></label>
+        <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0901234567">
+        <div class="err">Số điện thoại Việt Nam gồm 10 số, bắt đầu bằng 0.</div></div>
+      <div class="field"><label for="f-course">Khóa học quan tâm</label>
+        <select id="f-course" name="course">
+          <option value="">-- Chọn khóa học --</option>
+          <option>AI Cơ Bản — 12 buổi</option>
+          <option>Data Analytics — 16 buổi</option>
+          <option>Vibe Coding — 8 buổi</option>
+        </select></div>
+      <div class="field"><label for="f-msg">Tin nhắn (không bắt buộc)</label>
+        <textarea id="f-msg" name="message" placeholder="Bạn muốn BPND GROUP hỗ trợ điều gì?"></textarea></div>
+      <button type="submit" class="submit" id="submitBtn"><span class="spin"></span><span id="submitTxt">Gửi đăng ký</span></button>
+    </form>
+    <div class="success" aria-live="polite">
+      <div class="ok">✓</div>
+      <h3>Đăng ký thành công!</h3>
+      <p>Cảm ơn bạn. Chúng tôi sẽ liên hệ trong vòng 24 giờ.</p>
+      <button type="button" class="submit" id="doneBtn">Đóng</button>
+    </div>
+  </div>
+</div>
+<canvas id="confetti"></canvas>
+
+<script>
+// Modal đăng ký
+(function(){
+  var bd=document.getElementById('backdrop'),modal=document.getElementById('modal'),
+      form=document.getElementById('regForm'),btn=document.getElementById('submitBtn'),
+      txt=document.getElementById('submitTxt'),lastFocus;
+  var rules={
+    name:function(v){return v.trim().length>=2},
+    email:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())},
+    phone:function(v){return /^0\d{9}$/.test(v.replace(/[\s.\-]/g,''))}
+  };
+  function check(inp){
+    var ok=rules[inp.name](inp.value);
+    inp.parentNode.classList.toggle('invalid',!ok);
+    return ok;
+  }
+  Object.keys(rules).forEach(function(k){
+    var inp=form.elements[k];
+    inp.addEventListener('input',function(){
+      if(inp.parentNode.classList.contains('invalid')||inp.value) check(inp);
+    });
+    inp.addEventListener('blur',function(){check(inp)});
+  });
+
+  function open(e){
+    if(e)e.preventDefault();
+    lastFocus=document.activeElement;
+    bd.classList.add('open');bd.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){form.elements.name.focus()},300);
+  }
+  function close(){
+    bd.classList.remove('open');bd.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    setTimeout(function(){
+      if(modal.classList.contains('done')){modal.classList.remove('done');form.reset()}
+      [].forEach.call(form.querySelectorAll('.invalid'),function(f){f.classList.remove('invalid')});
+    },300);
+    if(lastFocus)lastFocus.focus();
+  }
+  [].forEach.call(document.querySelectorAll('[data-open-modal]'),function(el){el.addEventListener('click',open)});
+  document.getElementById('mClose').onclick=close;
+  document.getElementById('doneBtn').onclick=close;
+  bd.addEventListener('mousedown',function(e){if(e.target===bd)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bd.classList.contains('open'))close()});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=true,first=null;
+    ['name','email','phone'].forEach(function(k){
+      if(!check(form.elements[k])){ok=false;if(!first)first=form.elements[k]}
+    });
+    if(!ok){first.focus();return}
+    btn.disabled=true;btn.classList.add('loading');txt.textContent='Đang gửi...';
+    // TODO: thay setTimeout bằng fetch() gửi dữ liệu tới server/Google Sheet thật
+    setTimeout(function(){
+      btn.disabled=false;btn.classList.remove('loading');txt.textContent='Gửi đăng ký';
+      modal.classList.add('done');modal.scrollTop=0;
+      confetti();
+    },1500);
+  });
+
+  function confetti(){
+    var c=document.getElementById('confetti'),x=c.getContext('2d');
+    c.width=innerWidth;c.height=innerHeight;
+    var colors=['#00D4FF','#2f7bff','#ffc83d','#ff5d6c','#7cff9b','#ffffff'],P=[];
+    for(var i=0;i<140;i++)P.push({x:innerWidth/2,y:innerHeight/2.2,
+      vx:(Math.random()-.5)*16,vy:Math.random()*-14-3,s:Math.random()*8+4,
+      r:Math.random()*6.28,vr:(Math.random()-.5)*.4,c:colors[i%colors.length]});
+    var t0=performance.now();
+    (function f(t){
+      x.clearRect(0,0,c.width,c.height);
+      P.forEach(function(p){
+        p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.r+=p.vr;
+        x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore();
+      });
+      if(t-t0<3500)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height);
+    })(t0);
+  }
+})();
+</script>
+
+<script>
+// Pricing toggle
+(function(){
+  var sw=document.getElementById('sw'),plans=document.getElementById('plans'),
+      labM=document.getElementById('labM'),labY=document.getElementById('labY'),year=false;
+  function render(){
+    plans.classList.toggle('year-on',year);
+    sw.classList.toggle('year',year);sw.setAttribute('aria-checked',year);
+    labM.classList.toggle('on',!year);labY.classList.toggle('on',year);
+    [].forEach.call(plans.querySelectorAll('.amt[data-m]'),function(a){
+      a.classList.add('swap');
+      setTimeout(function(){
+        a.innerHTML=(year?a.dataset.y:a.dataset.m)+'<small> /tháng</small>';
+        a.classList.remove('swap');
+      },180);
+    });
+  }
+  sw.onclick=function(){year=!year;render()};
+  labM.onclick=function(){year=false;render()};
+  labY.onclick=function(){year=true;render()};
+})();
+</script>
+
+<script>
+// Testimonial slider
+(function(){
+  var track=document.getElementById('track'),n=track.children.length,i=0,timer,
+      dots=document.getElementById('dots');
+  for(var k=0;k<n;k++){(function(k){var d=document.createElement('span');d.className='dot';
+    d.onclick=function(){go(k);reset()};dots.appendChild(d)})(k)}
+  function go(x){
+    i=(x+n)%n;
+    track.style.transform='translateX(-'+i*100+'%)';
+    [].forEach.call(dots.children,function(d,j){d.classList.toggle('on',j===i)});
+  }
+  function reset(){clearInterval(timer);timer=setInterval(function(){go(i+1)},4000)}
+  document.getElementById('prev').onclick=function(){go(i-1);reset()};
+  document.getElementById('next').onclick=function(){go(i+1);reset()};
+  go(0);reset();
+})();
+
+// Counter khi scroll vào
+(function(){
+  var els=document.querySelectorAll('.count');
+  function run(el){
+    var to=+el.dataset.to,t0=null,dur=1800;
+    (function step(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/dur,1);
+      el.textContent=Math.round(to*(1-Math.pow(1-p,3)));
+      if(p<1)requestAnimationFrame(step);
+    })(performance.now());
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){run(e.target);io.unobserve(e.target)}});
+  },{threshold:.5});
+  els.forEach(function(e){io.observe(e)});
+})();
+
+// Typewriter
+(function(){
+  var text="Tăng Hiệu Suất Gấp X Lần", el=document.getElementById('type'), i=0, del=false;
+  function tick(){
+    el.textContent=text.slice(0,i);
+    if(!del && i===text.length){del=true;return setTimeout(tick,2000)}
+    if(del && i===0){del=false}
+    i+=del?-1:1;
+    setTimeout(tick,del?40:90);
+  }
+  tick();
+})();
+
+// Particles
+(function(){
+  var c=document.getElementById('particles'),x=c.getContext('2d'),P=[],W,H;
+  function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  size();addEventListener('resize',size);
+  var n=Math.min(80,Math.floor(innerWidth/16));
+  for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*2+.5});
+  (function draw(){
+    x.clearRect(0,0,W,H);
+    P.forEach(function(p,i){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+      x.fillStyle='rgba(110,168,255,.8)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();
+      for(var j=i+1;j<P.length;j++){
+        var q=P[j],d=Math.hypot(p.x-q.x,p.y-q.y);
+        if(d<120){x.strokeStyle='rgba(47,123,255,'+(.25*(1-d/120))+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}
+      }
+    });
+    requestAnimationFrame(draw);
+  })();
+})();
+</script>
+</body>
+</html>
